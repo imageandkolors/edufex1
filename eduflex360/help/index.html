@@ -1,0 +1,1546 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Documentation - EduFlex360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #facc15;
+            --danger: #f87171;
+            --gray: #6c757d;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-icon {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid var(--accent);
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: margin 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        .header-left h1 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Content */
+        .content {
+            padding: 30px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Help Header */
+        .help-header {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .help-banner {
+            height: 120px;
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        }
+
+        .help-info-section {
+            padding: 20px;
+            position: relative;
+        }
+
+        .help-icon {
+            position: absolute;
+            top: -40px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .help-details-container {
+            padding-left: 120px;
+            padding-top: 20px;
+        }
+
+        .help-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .help-badge {
+            background: #e2e8f0;
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .help-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .stat-title {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .user-avatar-small {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .role-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .role-admin {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .role-teacher {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .role-student {
+            background-color: #ffedd5;
+            color: #9a3412;
+        }
+
+        .role-parent {
+            background-color: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-suspended {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-delivered {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-read {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-failed {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-pending {
+            background-color: #ffedd5;
+            color: #9a3412;
+        }
+
+        /* Documentation Grid */
+        .documentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .doc-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.15);
+            border-color: var(--accent);
+        }
+
+        .doc-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .doc-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .doc-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .doc-description {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .doc-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .doc-content {
+            padding: 20px;
+        }
+
+        .doc-list {
+            list-style: none;
+        }
+
+        .doc-list-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .doc-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .doc-list-item i {
+            color: var(--primary);
+        }
+
+        .doc-list-item a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+            flex: 1;
+        }
+
+        .doc-list-item a:hover {
+            color: var(--primary);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .faq-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-question-text {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        /* Contact Support */
+        .support-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .support-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .support-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .support-content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .support-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .support-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin: 0 auto 20px;
+        }
+
+        .support-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .support-card-description {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .support-contact-form {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 0.3s;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.3s;
+        }
+
+        .form-textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        /* Pagination */
+        .pagination {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+        }
+
+        .pagination-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .pagination-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .pagination-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header h2,
+            .menu-text {
+                display: none;
+            }
+            
+            .sidebar-header {
+                justify-content: center;
+                padding: 20px 0;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .menu-item i {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .help-details-container {
+                padding-left: 20px;
+                padding-top: 70px;
+            }
+            
+            .help-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            th, td {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .action-buttons {
+                gap: 5px;
+            }
+            
+            .action-btn {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .help-details-container {
+                padding-left: 0;
+                padding-top: 80px;
+            }
+            
+            .help-meta {
+                align-items: center;
+            }
+            
+            .documentation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .support-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">E</div>
+            <h2>EduFlex360</h2>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item">
+                <i class="fas fa-home"></i>
+                <span class="menu-text">Dashboard</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-school"></i>
+                <span class="menu-text">Schools</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-users"></i>
+                <span class="menu-text">Users</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-book"></i>
+                <span class="menu-text">Classes</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-book-open"></i>
+                <span class="menu-text">Subjects & Curriculum</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span class="menu-text">Grading Systems</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="menu-text">Timetable & Attendance</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard-list"></i>
+                <span class="menu-text">Exams & Results</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span class="menu-text">Fees</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-comments"></i>
+                <span class="menu-text">Messaging & Notifications</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-user-shield"></i>
+                <span class="menu-text">Roles & Permissions</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-file-code"></i>
+                <span class="menu-text">Installer Logs</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-laptop-code"></i>
+                <span class="menu-text">CBT Exams</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span class="menu-text">Settings</span>
+            </div>
+            <div class="menu-item active">
+                <i class="fas fa-question-circle"></i>
+                <span class="menu-text">Help & Documentation</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="menu-text">Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>Help & Documentation Center</h1>
+            </div>
+            <div class="header-right">
+                <div class="notification-icon">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <div class="notification-badge">3</div>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div>
+                        <div>John Doe</div>
+                        <div style="font-size: 0.8rem; color: var(--gray);">Super Admin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <i class="fas fa-chevron-right" style="font-size: 0.8rem;"></i>
+                <a href="#">Support</a>
+                <i class="fas fa-chevron-right" style="font-size: 0.8rem;"></i>
+                <span>Help & Documentation</span>
+            </div>
+
+            <div class="page-header">
+                <h2>Knowledge Base & Support Center</h2>
+                <button class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search Documentation
+                </button>
+            </div>
+
+            <div class="help-header">
+                <div class="help-banner"></div>
+                <div class="help-info-section">
+                    <div class="help-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="help-details-container">
+                        <div class="help-name">Help & Documentation Center</div>
+                        <div class="help-badge">Knowledge Base & Support</div>
+                        <div class="help-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-fingerprint"></i>
+                                <span>System ID: HELP-2023-KB</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-school"></i>
+                                <span>Associated Schools: 12</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users"></i>
+                                <span>Total Users: 1,247</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-book"></i>
+                                <span>Documentation Articles: 89</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Last Updated: Sep 20, 2023</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Status: <span class="status-badge status-active">Active</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4361ee, #3a0ca3);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-title">Total Articles</div>
+                    <div class="stat-value">89</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f72585, #b5179e);">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="stat-title">Tutorials</div>
+                    <div class="stat-value">24</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4cc9f0, #4895ef);">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-title">Guides</div>
+                    <div class="stat-value">32</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f8961e, #f3722c);">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="stat-title">FAQs</div>
+                    <div class="stat-value">33</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Getting Started Guides</div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download All Guides
+                    </button>
+                </div>
+                
+                <div class="documentation-grid">
+                    <div class="doc-card">
+                        <div class="doc-header">
+                            <div class="doc-icon" style="background: linear-gradient(135deg, #4361ee, #3a0ca3);">
+                                <i class="fas fa-school"></i>
+                            </div>
+                            <div class="doc-title">School Setup Guide</div>
+                            <div class="doc-description">Step-by-step guide to setting up your first school in EduFlex360</div>
+                            <div class="doc-meta">
+                                <div><i class="fas fa-file-alt"></i> 12 pages</div>
+                                <div><i class="fas fa-star"></i> 4.8/5</div>
+                            </div>
+                        </div>
+                        <div class="doc-content">
+                            <ul class="doc-list">
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Creating a New School</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Configuring School Settings</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Adding Admin Users</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Setting Up Grading Systems</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Importing Curriculum</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="doc-card">
+                        <div class="doc-header">
+                            <div class="doc-icon" style="background: linear-gradient(135deg, #f72585, #b5179e);">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="doc-title">User Management Guide</div>
+                            <div class="doc-description">How to manage users, assign roles, and configure permissions</div>
+                            <div class="doc-meta">
+                                <div><i class="fas fa-file-alt"></i> 18 pages</div>
+                                <div><i class="fas fa-star"></i> 4.7/5</div>
+                            </div>
+                        </div>
+                        <div class="doc-content">
+                            <ul class="doc-list">
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Adding New Users</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Assigning Roles & Permissions</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Managing User Profiles</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Bulk User Import</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">User Status Management</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="doc-card">
+                        <div class="doc-header">
+                            <div class="doc-icon" style="background: linear-gradient(135deg, #4cc9f0, #4895ef);">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="doc-title">Class & Subject Setup</div>
+                            <div class="doc-description">Guide to configuring classes, sections, and subject curricula</div>
+                            <div class="doc-meta">
+                                <div><i class="fas fa-file-alt"></i> 15 pages</div>
+                                <div><i class="fas fa-star"></i> 4.9/5</div>
+                            </div>
+                        </div>
+                        <div class="doc-content">
+                            <ul class="doc-list">
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Creating Classes & Sections</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Assigning Class Teachers</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Setting Up Subject Curricula</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Managing Subject Allocations</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Curriculum Import/Export</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Feature-Specific Tutorials</div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-play-circle"></i> Watch All Videos
+                    </button>
+                </div>
+                
+                <div class="documentation-grid">
+                    <div class="doc-card">
+                        <div class="doc-header">
+                            <div class="doc-icon" style="background: linear-gradient(135deg, #f8961e, #f3722c);">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="doc-title">Timetable & Attendance</div>
+                            <div class="doc-description">Tutorial on creating timetables and managing student attendance</div>
+                            <div class="doc-meta">
+                                <div><i class="fas fa-video"></i> 15 minutes</div>
+                                <div><i class="fas fa-star"></i> 4.6/5</div>
+                            </div>
+                        </div>
+                        <div class="doc-content">
+                            <ul class="doc-list">
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Creating Weekly Timetables</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Managing Class Schedules</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Taking Daily Attendance</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Generating Attendance Reports</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Handling Attendance Exceptions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="doc-card">
+                        <div class="doc-header">
+                            <div class="doc-icon" style="background: linear-gradient(135deg, #9d4edd, #7b2cbf);">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <div class="doc-title">Exams & Results Management</div>
+                            <div class="doc-description">Tutorial on setting up exams, entering results, and generating reports</div>
+                            <div class="doc-meta">
+                                <div><i class="fas fa-video"></i> 22 minutes</div>
+                                <div><i class="fas fa-star"></i> 4.7/5</div>
+                            </div>
+                        </div>
+                        <div class="doc-content">
+                            <ul class="doc-list">
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Creating New Exams</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Setting Up CBT Exams</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Entering Exam Results</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Generating Result Reports</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Analyzing Exam Performance</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="doc-card">
+                        <div class="doc-header">
+                            <div class="doc-icon" style="background: linear-gradient(135deg, #2a9d8f, #1d7874);">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="doc-title">Fee Management & Transactions</div>
+                            <div class="doc-description">Tutorial on managing fees, processing payments, and generating invoices</div>
+                            <div class="doc-meta">
+                                <div><i class="fas fa-video"></i> 18 minutes</div>
+                                <div><i class="fas fa-star"></i> 4.8/5</div>
+                            </div>
+                        </div>
+                        <div class="doc-content">
+                            <ul class="doc-list">
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Setting Up Fee Structures</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Processing Student Payments</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Generating Invoices & Receipts</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Managing Fee Arrears</a>
+                                </li>
+                                <li class="doc-list-item">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <a href="#">Financial Reporting</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-header">
+                    <div class="faq-title">Frequently Asked Questions</div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i> Search FAQs
+                    </button>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-question-text">How do I reset a user's password?</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To reset a user's password, navigate to the "Users" section in the admin panel. Find the user in the list, click the "Edit" button, and then select "Reset Password". An email with a password reset link will be sent to the user's registered email address.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-question-text">What are the system requirements for installing EduFlex360?</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>EduFlex360 can be installed on various platforms:</p>
+                        <ul>
+                            <li><strong>VPS:</strong> Minimum 2GB RAM, 20GB SSD storage, Ubuntu 20.04 LTS or CentOS 8</li>
+                            <li><strong>cPanel:</strong> cPanel/WHM with PHP 8.1+, MySQL 5.7+, and sufficient disk space</li>
+                            <li><strong>Replit:</strong> 1GB RAM minimum, Node.js environment (for development/testing)</li>
+                        </ul>
+                        <p>For detailed installation instructions, please refer to the <a href="#">Installation Guide</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-question-text">How do I import student data in bulk?</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To import student data in bulk, go to the "Users" section and click "Bulk Import". Download the CSV template, fill in the student details, and then upload the completed file. The system will validate the data and create user accounts for each student. You can also assign them to classes and sections during the import process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-question-text">Can I customize the grading system for my school?</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, EduFlex360 supports multiple grading systems. You can configure percentage-based, letter grade, GPA, and skill-based grading systems. Navigate to "Grading Systems" in the admin panel to create or modify grading scales. You can also assign different grading systems to different classes or subjects as needed.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-question-text">How do I set up CBT exams?</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To set up a CBT exam, go to the "Exams & Results" section and click "Create New Exam". Select "CBT" as the exam type. You can then import questions from a PDF or DOCX file, set exam parameters (duration, number of questions, randomization), and schedule the exam. Students will receive an access code to take the exam through the CBT portal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="support-section">
+                <div class="support-header">
+                    <div class="support-title">Contact Support</div>
+                </div>
+                
+                <div class="support-content">
+                    <div class="support-card">
+                        <div class="support-icon" style="background: linear-gradient(135deg, #4361ee, #3a0ca3);">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="support-card-title">Live Chat Support</div>
+                        <div class="support-card-description">Get instant help from our support team during business hours (9AM - 6PM WAT)</div>
+                        <button class="btn btn-primary">Start Live Chat</button>
+                    </div>
+                    
+                    <div class="support-card">
+                        <div class="support-icon" style="background: linear-gradient(135deg, #f72585, #b5179e);">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="support-card-title">Email Support</div>
+                        <div class="support-card-description">Send us an email for non-urgent inquiries. We typically respond within 24 hours.</div>
+                        <button class="btn btn-secondary">support@eduflex360.com</button>
+                    </div>
+                    
+                    <div class="support-card">
+                        <div class="support-icon" style="background: linear-gradient(135deg, #4cc9f0, #4895ef);">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="support-card-title">Phone Support</div>
+                        <div class="support-card-description">Call our support hotline for urgent issues requiring immediate attention.</div>
+                        <button class="btn btn-secondary">+234 801 234 5678</button>
+                    </div>
+                </div>
+                
+                <div class="support-contact-form">
+                    <h3 style="margin-bottom: 20px; color: var(--dark);">Submit a Support Ticket</h3>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" class="form-input" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" placeholder="Enter your email address">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <input type="text" class="form-input" placeholder="Brief description of your issue">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>Technical Issue</option>
+                                <option>Billing Inquiry</option>
+                                <option>Feature Request</option>
+                                <option>Account Access</option>
+                                <option>Training Request</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" placeholder="Please describe your issue in detail..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Priority</label>
+                            <select class="form-select">
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                                <option>Urgent</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-paper-plane"></i> Submit Ticket
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to handle menu item active state
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Toggle answer visibility
+                answer.classList.toggle('show');
+                
+                // Toggle chevron icon
+                if (answer.classList.contains('show')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+    
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    

@@ -1,0 +1,37 @@
+my-laravel-app
+├── app
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── AuthController.php
+│   │   │   ├── FeeController.php
+│   │   │   └── TransactionController.php
+│   │   └── Middleware
+│   ├── Models
+│   │   ├── Fee.php
+│   │   ├── Transaction.php
+│   │   └── User.php
+│   └── Services
+│       └── PaymentService.php
+├── config
+│   └── app.php
+├── database
+│   └── migrations
+│       ├── create_users_table.php
+│       ├── create_fees_table.php
+│       └── create_transactions_table.php
+├── resources
+│   ├── views
+│   │   ├── layouts
+│   │   │   └── app.blade.php
+│   │   └── fees
+│   │       └── index.blade.php
+│   ├── css
+│   │   └── app.css
+│   └── js
+│       └── app.js
+├── routes
+│   ├── api.php
+│   └── web.php
+├── composer.json
+├── package.json
+└── README.md

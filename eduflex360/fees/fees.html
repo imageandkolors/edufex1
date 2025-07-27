@@ -1,0 +1,1205 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Management & Transactions - EduFlex360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #facc15;
+            --danger: #f87171;
+            --gray: #6c757d;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-icon {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid var(--accent);
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: margin 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        .header-left h1 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Content */
+        .content {
+            padding: 30px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Fee Header */
+        .fee-header {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .fee-banner {
+            height: 120px;
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        }
+
+        .fee-info-section {
+            padding: 20px;
+            position: relative;
+        }
+
+        .fee-icon {
+            position: absolute;
+            top: -40px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .fee-details-container {
+            padding-left: 120px;
+            padding-top: 20px;
+        }
+
+        .fee-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .fee-badge {
+            background: #e2e8f0;
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .fee-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .stat-title {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .user-avatar-small {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .role-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .role-admin {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .role-teacher {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .role-student {
+            background-color: #ffedd5;
+            color: #9a3412;
+        }
+
+        .role-parent {
+            background-color: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-paid {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background-color: #ffedd5;
+            color: #9a3412;
+        }
+
+        .status-overdue {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-cancelled {
+            background-color: #e2e8f0;
+            color: #6c757d;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .edit-btn {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .edit-btn:hover {
+            background-color: #bfdbfe;
+        }
+
+        .delete-btn {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .delete-btn:hover {
+            background-color: #fecaca;
+        }
+
+        .view-btn {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .view-btn:hover {
+            background-color: #bbf7d0;
+        }
+
+        .receipt-btn {
+            background-color: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .receipt-btn:hover {
+            background-color: #e9d5ff;
+        }
+
+        /* Pagination */
+        .pagination {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+        }
+
+        .pagination-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .pagination-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .pagination-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header h2,
+            .menu-text {
+                display: none;
+            }
+            
+            .sidebar-header {
+                justify-content: center;
+                padding: 20px 0;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .menu-item i {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .fee-details-container {
+                padding-left: 0;
+                padding-top: 80px;
+            }
+            
+            .fee-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            th, td {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .action-buttons {
+                gap: 5px;
+            }
+            
+            .action-btn {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">E</div>
+            <h2>EduFlex360</h2>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item">
+                <i class="fas fa-home"></i>
+                <span class="menu-text">Dashboard</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-school"></i>
+                <span class="menu-text">Schools</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-users"></i>
+                <span class="menu-text">Users</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-book"></i>
+                <span class="menu-text">Classes</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-book-open"></i>
+                <span class="menu-text">Subjects & Curriculum</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span class="menu-text">Grading Systems</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="menu-text">Timetable & Attendance</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard-list"></i>
+                <span class="menu-text">Exams & Results</span>
+            </div>
+            <div class="menu-item active">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span class="menu-text">Fees</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-comments"></i>
+                <span class="menu-text">Messaging & Notifications</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-user-shield"></i>
+                <span class="menu-text">Roles & Permissions</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-file-code"></i>
+                <span class="menu-text">Installer Logs</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-laptop-code"></i>
+                <span class="menu-text">CBT Exams</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span class="menu-text">Settings</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="menu-text">Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>Fee Management & Transactions</h1>
+            </div>
+            <div class="header-right">
+                <div class="notification-icon">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <div class="notification-badge">3</div>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div>
+                        <div>John Doe</div>
+                        <div style="font-size: 0.8rem; color: var(--gray);">Super Admin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <i class="fas fa-chevron-right" style="font-size: 0.8rem;"></i>
+                <a href="#">Financial Management</a>
+                <i class="fas fa-chevron-right" style="font-size: 0.8rem;"></i>
+                <span>Fee Management & Transactions</span>
+            </div>
+
+            <div class="page-header">
+                <h2>Fee Management & Transactions</h2>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i> Add New Fee Structure
+                </button>
+            </div>
+
+            <div class="fee-header">
+                <div class="fee-banner"></div>
+                <div class="fee-info-section">
+                    <div class="fee-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="fee-details-container">
+                        <div class="fee-name">Fee Management System</div>
+                        <div class="fee-badge">Financial Transactions & Records</div>
+                        <div class="fee-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-fingerprint"></i>
+                                <span>System ID: FEE-2023-MGMT</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-school"></i>
+                                <span>Associated Schools: 12</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users"></i>
+                                <span>Total Students: 1,247</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Tracking Since: Jan 15, 2023</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Last Updated: Sep 20, 2023</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Status: <span class="status-badge status-paid">Active</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4361ee, #3a0ca3);">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-title">Total Revenue</div>
+                    <div class="stat-value">₦2,450,000</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f72585, #b5179e);">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="stat-title">Pending Payments</div>
+                    <div class="stat-value">₦1,560,000</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4cc9f0, #4895ef);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-title">Overdue Payments</div>
+                    <div class="stat-value">₦320,000</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f8961e, #f3722c);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-title">Collection Rate</div>
+                    <div class="stat-value">82%</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Fee Structures</div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i> Create New Invoice
+                    </button>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Admission No.</th>
+                            <th>Class</th>
+                            <th>Term</th>
+                            <th>Amount</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">AJ</div>
+                                    <div>Adeola Johnson</div>
+                                </div>
+                            </td>
+                            <td>STU/2023/001</td>
+                            <td>JS2A</td>
+                            <td>First Term</td>
+                            <td>₦150,000</td>
+                            <td>₦150,000</td>
+                            <td>₦0</td>
+                            <td>2023-09-30</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn receipt-btn" title="Generate Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">CO</div>
+                                    <div>Chinedu Okonkwo</div>
+                                </div>
+                            </td>
+                            <td>STU/2023/015</td>
+                            <td>JS2B</td>
+                            <td>First Term</td>
+                            <td>₦150,000</td>
+                            <td>₦100,000</td>
+                            <td>₦50,000</td>
+                            <td>2023-09-30</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn receipt-btn" title="Generate Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">FE</div>
+                                    <div>Fatima El</div>
+                                </div>
+                            </td>
+                            <td>STU/2023/022</td>
+                            <td>JS2A</td>
+                            <td>First Term</td>
+                            <td>₦150,000</td>
+                            <td>₦0</td>
+                            <td>₦150,000</td>
+                            <td>2023-09-30</td>
+                            <td><span class="status-badge status-overdue">Overdue</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn receipt-btn" title="Generate Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">MO</div>
+                                    <div>Musa Okafor</div>
+                                </div>
+                            </td>
+                            <td>STU/2023/038</td>
+                            <td>JS2C</td>
+                            <td>First Term</td>
+                            <td>₦150,000</td>
+                            <td>₦150,000</td>
+                            <td>₦0</td>
+                            <td>2023-09-30</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn receipt-btn" title="Generate Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">RS</div>
+                                    <div>Rajesh Sharma</div>
+                                </div>
+                            </td>
+                            <td>STU/2023/045</td>
+                            <td>JS2B</td>
+                            <td>First Term</td>
+                            <td>₦150,000</td>
+                            <td>₦150,000</td>
+                            <td>₦0</td>
+                            <td>2023-09-30</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn receipt-btn" title="Generate Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="pagination">
+                    <div class="pagination-info">Showing 1 to 5 of 142 entries</div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Recent Transactions</div>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Export Transactions
+                    </button>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Student</th>
+                            <th>Class</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TXN-20231015-001</td>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">AJ</div>
+                                    <div>Adeola Johnson</div>
+                                </div>
+                            </td>
+                            <td>JS2A</td>
+                            <td>₦150,000</td>
+                            <td>Bank Transfer</td>
+                            <td>2023-10-15 10:30:22</td>
+                            <td><span class="status-badge status-success">Completed</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn receipt-btn" title="View Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TXN-20231014-022</td>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">CO</div>
+                                    <div>Chinedu Okonkwo</div>
+                                </div>
+                            </td>
+                            <td>JS2B</td>
+                            <td>₦100,000</td>
+                            <td>Online Payment</td>
+                            <td>2023-10-14 09:15:47</td>
+                            <td><span class="status-badge status-success">Completed</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn receipt-btn" title="View Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TXN-20231012-015</td>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">MO</div>
+                                    <div>Musa Okafor</div>
+                                </div>
+                            </td>
+                            <td>JS2C</td>
+                            <td>₦150,000</td>
+                            <td>Cash</td>
+                            <td>2023-10-12 16:45:33</td>
+                            <td><span class="status-badge status-success">Completed</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn receipt-btn" title="View Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TXN-20231010-008</td>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">RS</div>
+                                    <div>Rajesh Sharma</div>
+                                </div>
+                            </td>
+                            <td>JS2B</td>
+                            <td>₦150,000</td>
+                            <td>Bank Transfer</td>
+                            <td>2023-10-10 11:20:55</td>
+                            <td><span class="status-badge status-success">Completed</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn receipt-btn" title="View Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TXN-20231009-031</td>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">FE</div>
+                                    <div>Fatima El</div>
+                                </div>
+                            </td>
+                            <td>JS2A</td>
+                            <td>₦150,000</td>
+                            <td>Online Payment</td>
+                            <td>2023-10-09 13:55:18</td>
+                            <td><span class="status-badge status-success">Completed</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn receipt-btn" title="View Receipt">
+                                        <i class="fas fa-receipt"></i>
+                                    </button>
+                                    <button class="action-btn view-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="pagination">
+                    <div class="pagination-info">Showing 1 to 5 of 142 entries</div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to handle menu item active state
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+    
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    
