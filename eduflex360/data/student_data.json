@@ -1,0 +1,56 @@
+{
+  "student": {
+    "name": "Alex Doe",
+    "email": "alex.doe@example.com",
+    "avatar": "https://via.placeholder.com/150"
+  },
+  "enrolled_courses": [
+    {
+      "id": "C001",
+      "title": "Introduction to Web Development",
+      "instructor": "Dr. Evelyn Reed",
+      "progress": 75,
+      "thumbnail": "https://via.placeholder.com/300x200/4361ee/ffffff?text=Web+Dev"
+    },
+    {
+      "id": "C002",
+      "title": "Advanced JavaScript",
+      "instructor": "Prof. David Chen",
+      "progress": 45,
+      "thumbnail": "https://via.placeholder.com/300x200/3f37c9/ffffff?text=JavaScript"
+    },
+    {
+      "id": "C003",
+      "title": "Database Design and SQL",
+      "instructor": "Dr. Maria Garcia",
+      "progress": 90,
+      "thumbnail": "https://via.placeholder.com/300x200/4cc9f0/ffffff?text=SQL"
+    }
+  ],
+  "upcoming_quizzes": [
+    {
+      "quiz_id": "QZ01",
+      "course_title": "Introduction to Web Development",
+      "quiz_title": "Mid-term Exam",
+      "due_date": "2025-08-15T23:59:59Z"
+    },
+    {
+      "quiz_id": "QZ02",
+      "course_title": "Advanced JavaScript",
+      "quiz_title": "Quiz 3: Asynchronous JS",
+      "due_date": "2025-08-20T23:59:59Z"
+    }
+  ],
+  "recent_grades": [
+      {
+          "course_title": "Introduction to Web Development",
+          "assignment": "Assignment 2",
+          "grade": "A"
+      },
+      {
+          "course_title": "Advanced JavaScript",
+          "assignment": "Quiz 2",
+          "grade": "B+"
+      }
+  ]
+}

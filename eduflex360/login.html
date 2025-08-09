@@ -4,47 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - EduFlex360</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
 
         .login-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            width: 100%;
             max-width: 450px;
-            overflow: hidden;
-        }
-
-        .login-header {
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        .login-header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .login-header p {
-            opacity: 0.9;
-            font-size: 1rem;
         }
 
         .logo-icon {
@@ -61,181 +28,98 @@
             margin: 0 auto 15px;
         }
 
-        .login-form {
-            padding: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: #4361ee;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
-        }
-
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .remember-forgot label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .remember-forgot label input {
-            width: auto;
-            margin-right: 8px;
-        }
-
-        .remember-forgot a {
-            color: #4361ee;
-            text-decoration: none;
-        }
-
-        .remember-forgot a:hover {
-            text-decoration: underline;
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
-        }
-
-        .login-button:active {
-            transform: translateY(0);
-        }
-
-        .signup-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #666;
-        }
-
-        .signup-link a {
-            color: #4361ee;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        .error-message {
-            color: #e63946;
-            font-size: 0.9rem;
-            margin-top: 5px;
-            display: none;
+        .login-header {
+             background: linear-gradient(135deg, #4361ee, #3a0ca3);
         }
     </style>
 </head>
-<body>
-    <div class="login-container">
-        <div class="login-header">
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="login-container bg-white shadow rounded overflow-hidden">
+        <div class="login-header text-white text-center p-4">
             <div class="logo-icon">E</div>
-            <h1>Welcome to EduFlex360</h1>
-            <p>Please sign in to access your account</p>
+            <h1 class="h4 mb-2">Welcome to EduFlex360</h1>
+            <p class="mb-0">Please sign in to access your account</p>
         </div>
-        
-        <form class="login-form" id="loginForm">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-                <div class="error-message" id="email-error">Please enter a valid email address</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <div class="error-message" id="password-error">Password must be at least 6 characters</div>
-            </div>
-            
-            <div class="remember-forgot">
-                <label>
-                    <input type="checkbox" id="remember" name="remember">
-                    Remember me
-                </label>
-                <a href="#">Forgot password?</a>
-            </div>
-            
-            <button type="submit" class="login-button">Sign In</button>
-            
-            <div class="signup-link">
-                Don't have an account? <a href="register.html">Create one</a>
-            </div>
-        </form>
+
+        <div class="p-4">
+            <form id="loginForm" novalidate>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required minlength="6">
+                    <div class="invalid-feedback">
+                        Password must be at least 6 characters.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label">Login as</label>
+                    <select class="form-select" id="role" required>
+                        <option value="" selected disabled>Select a role...</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a role.</div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+
+                <div class="text-center mt-3">
+                    <p class="mb-0">Don't have an account? <a href="register.html" class="text-decoration-none">Create one</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Simple form validation
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            let isValid = true;
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                document.getElementById('email-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('email-error').style.display = 'none';
-            }
-            
-            // Password validation
-            if (password.length < 6) {
-                document.getElementById('password-error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('password-error').style.display = 'none';
-            }
-            
-            if (isValid) {
-                // In a real application, you would submit the form to your backend
-                // For now, we'll just show an alert
-                alert('Login successful! Redirecting to dashboard...');
-                // window.location.href = 'dashboard.html'; // Uncomment for real redirect
-            }
-        });
+        (function () {
+            'use strict'
+
+            var form = document.getElementById('loginForm');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault()
+                event.stopPropagation()
+
+                if (form.checkValidity()) {
+                    const role = document.getElementById('role').value;
+                    let dashboardUrl = '';
+                    switch (role) {
+                        case 'student':
+                            dashboardUrl = 'student_dashboard.html';
+                            break;
+                        case 'teacher':
+                            dashboardUrl = 'teacher_dashboard.html';
+                            break;
+                        case 'admin':
+                            dashboardUrl = 'admin_dashboard.html';
+                            break;
+                    }
+                    if (dashboardUrl) {
+                        window.location.href = dashboardUrl;
+                    }
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })()
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

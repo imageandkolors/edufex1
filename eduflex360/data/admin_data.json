@@ -1,0 +1,55 @@
+{
+  "admin": {
+    "name": "Super Admin",
+    "email": "admin@eduflex360.com",
+    "avatar": "https://via.placeholder.com/150/ff0000/ffffff?text=A"
+  },
+  "stats": {
+    "total_users": 1250,
+    "total_courses": 78,
+    "total_schools": 5,
+    "active_students": 980
+  },
+  "users": [
+    {
+      "id": "U001",
+      "name": "Alex Doe",
+      "email": "alex.doe@example.com",
+      "role": "Student",
+      "school": "University of Tech",
+      "status": "Active"
+    },
+    {
+      "id": "U002",
+      "name": "Dr. Evelyn Reed",
+      "email": "e.reed@example.com",
+      "role": "Teacher",
+      "school": "University of Tech",
+      "status": "Active"
+    },
+    {
+      "id": "U003",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "role": "Student",
+      "school": "Bright Minds College",
+      "status": "Inactive"
+    }
+  ],
+  "courses": [
+      {
+        "id": "C001",
+        "title": "Introduction to Web Development",
+        "school": "University of Tech",
+        "instructor": "Dr. Evelyn Reed",
+        "enrollment": 124
+      },
+      {
+        "id": "C002",
+        "title": "Advanced JavaScript",
+        "school": "University of Tech",
+        "instructor": "Prof. David Chen",
+        "enrollment": 95
+      }
+  ]
+}
