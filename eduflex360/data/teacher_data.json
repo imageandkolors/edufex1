@@ -1,0 +1,42 @@
+{
+  "teacher": {
+    "name": "Dr. Evelyn Reed",
+    "email": "e.reed@example.com",
+    "avatar": "https://via.placeholder.com/150/4361ee/ffffff?text=ER"
+  },
+  "managed_courses": [
+    {
+      "id": "C001",
+      "title": "Introduction to Web Development",
+      "enrollment": 124,
+      "thumbnail": "https://via.placeholder.com/300x200/4361ee/ffffff?text=Web+Dev"
+    },
+    {
+      "id": "C004",
+      "title": "UI/UX Design Fundamentals",
+      "enrollment": 78,
+      "thumbnail": "https://via.placeholder.com/300x200/3a0ca3/ffffff?text=UI/UX"
+    }
+  ],
+  "recent_submissions": [
+    {
+        "student_name": "Alex Doe",
+        "course_title": "Introduction to Web Development",
+        "assignment": "Assignment 3",
+        "submitted_at": "2025-08-14T10:30:00Z"
+    },
+    {
+        "student_name": "Jane Smith",
+        "course_title": "UI/UX Design Fundamentals",
+        "assignment": "Project Proposal",
+        "submitted_at": "2025-08-14T09:15:00Z"
+    }
+  ],
+  "upcoming_deadlines": [
+      {
+          "course_title": "Introduction to Web Development",
+          "assignment": "Final Project",
+          "due_date": "2025-08-30T23:59:59Z"
+      }
+  ]
+}
