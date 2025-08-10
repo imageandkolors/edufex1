@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- Heads-Up Display (HUD) -->
+        <div id="hud">
+            <div id="player-stats">
+                <p>LVL: <span id="player-level">1</span></p>
+                <div class="stat-bar">
+                    <span class="stat-bar-label">HP</span>
+                    <div class="bar-container">
+                        <div id="hp-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="stat-bar">
+                    <span class="stat-bar-label">MANA</span>
+                     <div class="bar-container">
+                        <div id="mana-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="game-info">
+                <p>Gold: <span id="player-gold">0</span></p>
+                <p>Quest: <span id="current-quest">None</span></p>
+            </div>
+        </div>
+
+        <!-- UI Panels -->
+        <div id="dialog-box" class="ui-panel hidden">
+            <p id="dialog-text">Dialog goes here...</p>
+            <div id="dialog-choices"></div>
+        </div>
+
+        <div id="inventory-screen" class="ui-panel hidden">
+            <h3>Inventory</h3>
+            <div id="inventory-list"></div>
+            <button class="close-button" data-target="inventory-screen">Close</button>
+        </div>
+
+        <div id="quest-log" class="ui-panel hidden">
+            <h3>Quests</h3>
+            <div id="quest-list"></div>
+            <button class="close-button" data-target="quest-log">Close</button>
+        </div>
+
+        <div id="game-menu">
+             <button id="inventory-button">Inventory</button>
+             <button id="quests-button">Quests</button>
+             <button id="save-button">Save</button>
+             <button id="load-button">Load</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
