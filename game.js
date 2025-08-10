@@ -10,24 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- UI MANAGER ---
-    // Manages all interactions with the HTML UI elements.
     const UIManager = {
         elements: {},
         init() {
             this.elements = {
-                // HUD
                 playerLevel: document.getElementById('player-level'),
                 hpBar: document.getElementById('hp-bar'),
                 manaBar: document.getElementById('mana-bar'),
                 playerGold: document.getElementById('player-gold'),
                 currentQuest: document.getElementById('current-quest'),
-                // Panels
                 inventoryScreen: document.getElementById('inventory-screen'),
                 questLog: document.getElementById('quest-log'),
-                // Panel Content
                 inventoryList: document.getElementById('inventory-list'),
                 questList: document.getElementById('quest-list'),
-                // Buttons
                 inventoryButton: document.getElementById('inventory-button'),
                 questsButton: document.getElementById('quests-button'),
                 closeButtons: document.querySelectorAll('.close-button'),
@@ -37,32 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
             this.elements.closeButtons.forEach(btn => {
                 btn.addEventListener('click', () => this.hidePanel(btn.dataset.target));
             });
-            console.log("UI Manager initialized.");
         },
         update(player) {
             this.elements.playerLevel.textContent = player.level;
             this.elements.playerGold.textContent = player.gold;
-            // Update bars (assuming max stats are in player.baseStats)
             const hpPercent = (player.stats.hp / player.baseStats.hp) * 100;
             const manaPercent = (player.stats.mana / player.baseStats.mana) * 100;
             this.elements.hpBar.style.width = `${hpPercent}%`;
             this.elements.manaBar.style.width = `${manaPercent}%`;
-            // Update current quest
             const activeQuest = player.quests.find(q => q.status === 'active');
             this.elements.currentQuest.textContent = activeQuest ? activeQuest.title : 'None';
         },
-        togglePanel(panelId) {
-            const panel = this.elements[panelId];
-            if (panel) {
-                panel.classList.toggle('hidden');
-            }
-        },
-        hidePanel(panelId) {
-             const panel = this.elements[panelId];
-            if (panel) {
-                panel.classList.add('hidden');
-            }
-        }
+        togglePanel(panelId) { this.elements[panelId]?.classList.toggle('hidden'); },
+        hidePanel(panelId) { this.elements[panelId]?.classList.add('hidden'); }
     };
 
     // --- INVENTORY MANAGER ---
@@ -111,26 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
         saveKey: 'pixelRpgSaveData',
         save(player) {
             const saveData = {
-                x: player.x,
-                y: player.y,
-                level: player.level,
-                gold: player.gold,
-                stats: player.stats,
-                inventory: player.inventory,
-                quests: player.quests
+                x: player.x, y: player.y, level: player.level, gold: player.gold,
+                stats: player.stats, inventory: player.inventory, quests: player.quests
             };
             localStorage.setItem(this.saveKey, JSON.stringify(saveData));
-            console.log("Game saved!", saveData);
             alert("Game Saved!");
         },
         load() {
             const savedData = localStorage.getItem(this.saveKey);
-            if (savedData) {
-                console.log("Save data found, loading.");
-                return JSON.parse(savedData);
-            }
-            console.log("No save data found.");
-            return null;
+            return savedData ? JSON.parse(savedData) : null;
         }
     };
 
@@ -138,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const CombatManager = {
         startCombat(player, enemyId) {
             alert(`Combat started with an enemy of type: ${enemyId}!`);
-            console.log(`Combat would start here between player and ${enemyId}.`);
         }
     };
 
@@ -151,8 +121,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
+    function loadImage(src) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = (err) => reject(`Failed to load image: ${src}`);
+            img.src = src;
+        });
+    }
+
+    // --- ENEMY CLASS ---
+    class Enemy {
+        constructor(x, y, enemyData) {
+            this.x = x;
+            this.y = y;
+            this.size = 32;
+            this.stats = { ...enemyData.stats };
+            this.name = enemyData.name;
+            this.id = enemyData.id;
+        }
+
+        draw(ctx, images) {
+            const sprite = images[this.id];
+            if (sprite) {
+                ctx.drawImage(sprite, this.x, this.y, this.size, this.size);
+            } else {
+                ctx.fillStyle = 'magenta'; // Use a bright color for missing sprites
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+    }
+
     // --- WORLD CLASS ---
-    class World { /* ... (unchanged) ... */
+    class World {
         constructor() {
             this.tileSize = 32;
             this.tileMap = [
@@ -170,17 +171,16 @@ document.addEventListener('DOMContentLoaded', () => {
         isSolid(x, y) {
             const tileX = Math.floor(x / this.tileSize);
             const tileY = Math.floor(y / this.tileSize);
-            if (tileY < 0 || tileY >= this.tileMap.length || tileX < 0 || tileX >= this.tileMap[0].length) {
-                return true;
-            }
+            if (tileY < 0 || tileY >= this.tileMap.length || tileX < 0 || tileX >= this.tileMap[0].length) return true;
             return this.tileMap[tileY][tileX] === 1;
         }
-        draw(ctx) {
+        draw(ctx, images) {
             for (let row = 0; row < this.tileMap.length; row++) {
                 for (let col = 0; col < this.tileMap[row].length; col++) {
-                    const tile = this.tileMap[row][col];
-                    ctx.fillStyle = tile === 1 ? '#4a4a4a' : '#8a8a8a';
-                    ctx.fillRect(col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize);
+                    ctx.drawImage(images.floor, col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize);
+                    if (this.tileMap[row][col] === 1) {
+                        ctx.drawImage(images.wall, col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize);
+                    }
                 }
             }
         }
@@ -189,21 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- PLAYER CLASS ---
     class Player {
         constructor(classData) {
-            this.x = 64;
-            this.y = 64;
-            this.size = 28;
-            this.speed = 150;
+            this.x = 64; this.y = 64; this.size = 28; this.speed = 150;
             this.name = classData.name;
-            // Full stats for reference, current stats for gameplay
-            this.baseStats = { ...classData.stats };
-            this.stats = { ...classData.stats };
-            this.level = 1;
-            this.gold = 25;
-            // Starting items and quests for the scaffold
+            this.baseStats = { ...classData.stats }; this.stats = { ...classData.stats };
+            this.level = 1; this.gold = 25;
             this.inventory = [{ id: 'health_potion', quantity: 3 }];
             this.quests = [{ id: 'q1_tutorial', status: 'active' }];
         }
-        update(deltaTime, world) { /* ... (unchanged) ... */
+        update(deltaTime, world) {
             const moveSpeed = this.speed * (deltaTime / 1000);
             let dx = 0, dy = 0;
             if (Input.keys['KeyW'] || Input.keys['ArrowUp']) dy -= 1;
@@ -214,93 +207,101 @@ document.addEventListener('DOMContentLoaded', () => {
                  const length = Math.sqrt(dx * dx + dy * dy);
                  const moveX = (dx / length) * moveSpeed;
                  const moveY = (dy / length) * moveSpeed;
-                if (!world.isSolid(this.x + moveX, this.y) && !world.isSolid(this.x + moveX + this.size, this.y + this.size) && !world.isSolid(this.x + moveX, this.y + this.size) && !world.isSolid(this.x + moveX + this.size, this.y)) {
-                    this.x += moveX;
-                }
-                if (!world.isSolid(this.x, this.y + moveY) && !world.isSolid(this.x + this.size, this.y + moveY + this.size) && !world.isSolid(this.x, this.y + moveY + this.size) && !world.isSolid(this.x + this.size, this.y + moveY)) {
-                    this.y += moveY;
-                }
+                if (!world.isSolid(this.x + moveX, this.y) && !world.isSolid(this.x + moveX + this.size, this.y + this.size) && !world.isSolid(this.x + moveX, this.y + this.size) && !world.isSolid(this.x + moveX + this.size, this.y)) this.x += moveX;
+                if (!world.isSolid(this.x, this.y + moveY) && !world.isSolid(this.x + this.size, this.y + moveY + this.size) && !world.isSolid(this.x, this.y + moveY + this.size) && !world.isSolid(this.x + this.size, this.y + moveY)) this.y += moveY;
             }
         }
-        draw(ctx) { /* ... (unchanged) ... */
-            ctx.fillStyle = '#f1c40f';
-            ctx.fillRect(this.x, this.y, this.size, this.size);
+        draw(ctx, images) {
+            ctx.drawImage(images.player, this.x, this.y, this.size, this.size);
         }
     }
 
     // --- MAIN GAME OBJECT ---
     const Game = {
-        // ... properties ...
         canvas: null, ctx: null, lastTime: 0,
         world: null, player: null,
+        enemies: [],
+        images: {},
         data: {},
+        assetsLoaded: false,
 
         init() {
             this.canvas = document.getElementById('game-canvas');
             this.ctx = this.canvas.getContext('2d');
             this.resizeCanvas();
             window.addEventListener('resize', () => this.resizeCanvas());
-
-            Input.init(); // Initialize input handler
-            UIManager.init(); // Initialize UI manager
-
+            Input.init(); UIManager.init();
             console.log("Initializing game...");
 
             this.loadAssets().then(() => {
-                console.log("Assets loaded.");
+                if (!this.assetsLoaded) return;
                 this.world = new World();
-                this.player = new Player(this.data.classes[0]); // Default to Warrior
-
-                // Render initial UI state
+                this.player = new Player(this.data.classes[0]);
+                this.spawnEnemies();
                 InventoryManager.render(this.player, this.data.items);
                 QuestManager.render(this.player, this.data.quests);
-
-                // Hook up save/load buttons
                 document.getElementById('save-button').addEventListener('click', () => this.saveGame());
                 document.getElementById('load-button').addEventListener('click', () => this.loadGame());
-
                 this.gameLoop(0);
             });
         },
 
-        saveGame() {
-            SaveManager.save(this.player);
+        spawnEnemies() {
+            this.enemies = [];
+            const goblinData = this.data.enemies.find(e => e.id === 'goblin');
+            if (goblinData) {
+                this.enemies.push(new Enemy(160, 160, goblinData));
+                this.enemies.push(new Enemy(320, 96, goblinData));
+                this.enemies.push(new Enemy(224, 224, goblinData));
+            }
+            console.log(`${this.enemies.length} enemies spawned.`);
         },
 
+        async loadAssets() {
+            console.log("Loading assets...");
+            const dataPaths = {
+                classes: 'assets/data/classes.json', enemies: 'assets/data/enemies.json',
+                items: 'assets/data/items.json', quests: 'assets/data/quests.json',
+            };
+            const imagePaths = {
+                player: 'assets/images/player.png', wall: 'assets/images/wall.png',
+                floor: 'assets/images/floor.png', goblin: 'assets/images/goblin.png',
+            };
+
+            try {
+                const dataPromises = Object.values(dataPaths).map(path => fetch(path).then(res => res.json()));
+                const imagePromises = Object.values(imagePaths).map(loadImage);
+
+                const [jsonData, imageData] = await Promise.all([
+                    Promise.all(dataPromises), Promise.all(imagePromises)
+                ]);
+
+                Object.keys(dataPaths).forEach((key, i) => { this.data[key] = jsonData[i]; });
+                Object.keys(imagePaths).forEach((key, i) => { this.images[key] = imageData[i]; });
+
+                console.log("All assets loaded successfully.");
+                this.assetsLoaded = true;
+            } catch (error) {
+                console.error("Error loading assets:", error);
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.ctx.fillStyle = 'red';
+                this.ctx.font = '14px "Courier New"';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText('Error loading assets. See console (F12) for details.', this.canvas.width / 2, this.canvas.height / 2);
+            }
+        },
+
+        saveGame() { SaveManager.save(this.player); },
         loadGame() {
             const loadedData = SaveManager.load();
             if (loadedData) {
-                // Apply loaded data to the player object
-                this.player.x = loadedData.x;
-                this.player.y = loadedData.y;
-                this.player.level = loadedData.level;
-                this.player.gold = loadedData.gold;
-                this.player.stats = loadedData.stats;
-                this.player.inventory = loadedData.inventory;
-                this.player.quests = loadedData.quests;
-                // Re-render UI
+                Object.assign(this.player, loadedData);
                 InventoryManager.render(this.player, this.data.items);
                 QuestManager.render(this.player, this.data.quests);
                 alert("Game Loaded!");
             } else {
                 alert("No save data found!");
             }
-        },
-
-        async loadAssets() { /* ... (unchanged) ... */
-            const assetPaths = {
-                classes: 'assets/data/classes.json',
-                enemies: 'assets/data/enemies.json',
-                items: 'assets/data/items.json',
-                quests: 'assets/data/quests.json',
-            };
-            this.data = {};
-            try {
-                const responses = await Promise.all(Object.values(assetPaths).map(path => fetch(path)));
-                const jsonData = await Promise.all(responses.map(res => res.json()));
-                const keys = Object.keys(assetPaths);
-                for (let i = 0; i < keys.length; i++) { this.data[keys[i]] = jsonData[i]; }
-            } catch (error) { console.error("Error loading assets:", error); }
         },
 
         gameLoop(timestamp) {
@@ -312,30 +313,27 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         update(deltaTime) {
-            if (this.player && this.world) {
-                this.player.update(deltaTime, this.world);
-                UIManager.update(this.player);
-            }
+            if (!this.assetsLoaded) return;
+            this.player.update(deltaTime, this.world);
+            UIManager.update(this.player);
         },
 
         draw() {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            if (this.world && this.player) {
-                this.world.draw(this.ctx);
-                this.player.draw(this.ctx);
-            } else {
-                this.ctx.fillStyle = 'white';
-                this.ctx.font = '24px "Courier New"';
-                this.ctx.textAlign = 'center';
-                this.ctx.fillText('Loading...', this.canvas.width / 2, this.canvas.height / 2);
+            if (this.assetsLoaded) {
+                this.world.draw(this.ctx, this.images);
+                this.player.draw(this.ctx, this.images);
+                this.enemies.forEach(enemy => {
+                    enemy.draw(this.ctx, this.images);
+                });
             }
         },
 
-        resizeCanvas() { /* ... (unchanged) ... */
+        resizeCanvas() {
             const container = document.getElementById('game-container');
             this.canvas.width = container.clientWidth;
             this.canvas.height = container.clientHeight;
-            if (this.ctx) { this.draw(); }
+            if (this.ctx && this.assetsLoaded) { this.draw(); }
         }
     };
 
