@@ -1,0 +1,20 @@
+[
+  {
+    "id": "wolf",
+    "name": "Wolf",
+    "stats": { "hp": 40, "attack": 10, "defense": 5, "speed": 12, "xp": 15, "gold": 5 },
+    "ai": { "behavior": "attack" }
+  },
+  {
+    "id": "goblin",
+    "name": "Goblin",
+    "stats": { "hp": 50, "attack": 8, "defense": 8, "speed": 8, "xp": 20, "gold": 10 },
+    "ai": { "behavior": "attack", "flee_threshold": 0.2 }
+  },
+  {
+    "id": "skeleton",
+    "name": "Skeleton",
+    "stats": { "hp": 60, "attack": 12, "defense": 10, "speed": 6, "xp": 25, "gold": 8 },
+    "ai": { "behavior": "attack" }
+  }
+]

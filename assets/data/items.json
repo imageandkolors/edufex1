@@ -1,0 +1,13 @@
+{
+  "weapons": [
+    { "id": "rusty_sword", "name": "Rusty Sword", "type": "weapon", "slot": "weapon", "attack": 5 },
+    { "id": "wooden_staff", "name": "Wooden Staff", "type": "weapon", "slot": "weapon", "attack": 3, "mana_bonus": 10 }
+  ],
+  "armor": [
+    { "id": "leather_tunic", "name": "Leather Tunic", "type": "armor", "slot": "body", "defense": 4 },
+    { "id": "iron_helmet", "name": "Iron Helmet", "type": "armor", "slot": "head", "defense": 2 }
+  ],
+  "consumables": [
+    { "id": "health_potion", "name": "Health Potion", "type": "consumable", "effect": "heal", "value": 50 }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "warrior",
+    "name": "Warrior",
+    "stats": { "hp": 120, "mana": 30, "attack": 15, "defense": 12, "speed": 8 },
+    "abilities": [
+      { "id": "power_strike", "name": "Power Strike", "cost": 10, "description": "A strong attack." },
+      { "id": "shield_bash", "name": "Shield Bash", "cost": 15, "description": "May stun the enemy." },
+      { "id": "battle_cry", "name": "Battle Cry", "cost": 5, "description": "Increases attack for 3 turns." }
+    ]
+  },
+  {
+    "id": "mage",
+    "name": "Mage",
+    "stats": { "hp": 80, "mana": 80, "attack": 8, "defense": 6, "speed": 10 },
+    "abilities": [
+      { "id": "fireball", "name": "Fireball", "cost": 20, "description": "Deals fire damage." },
+      { "id": "ice_lance", "name": "Ice Lance", "cost": 15, "description": "May freeze the enemy." },
+      { "id": "mana_shield", "name": "Mana Shield", "cost": 25, "description": "Reduces incoming damage." }
+    ]
+  },
+  {
+    "id": "rogue",
+    "name": "Rogue",
+    "stats": { "hp": 90, "mana": 40, "attack": 12, "defense": 8, "speed": 15 },
+    "abilities": [
+      { "id": "backstab", "name": "Backstab", "cost": 15, "description": "Deals high damage from the shadows." },
+      { "id": "poison_dart", "name": "Poison Dart", "cost": 10, "description": "Poisons the enemy." },
+      { "id": "evade", "name": "Evade", "cost": 10, "description": "Increases chance to dodge." }
+    ]
+  }
+]

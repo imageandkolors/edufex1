@@ -1,0 +1,29 @@
+[
+  {
+    "id": "q1_tutorial",
+    "title": "A Hero's First Steps",
+    "description": "Speak to the Village Elder to learn the basics of your adventure.",
+    "objectives": [
+      { "type": "talk_to_npc", "target": "elder", "description": "Find the Village Elder." }
+    ],
+    "rewards": { "xp": 50, "gold": 10, "items": ["health_potion"] }
+  },
+  {
+    "id": "q2_village_help",
+    "title": "Goblin Menace",
+    "description": "Goblins have been spotted near the village. Clear them out.",
+    "objectives": [
+      { "type": "kill_enemies", "target": "goblin", "count": 3, "description": "Defeat 3 Goblins." }
+    ],
+    "rewards": { "xp": 100, "gold": 50, "items": ["rusty_sword"] }
+  },
+  {
+    "id": "q3_forest_clear",
+    "title": "Clearing the Forest",
+    "description": "The path to the old dungeon is blocked by aggressive wolves. Clear a path.",
+    "objectives": [
+        { "type": "kill_enemies", "target": "wolf", "count": 5, "description": "Defeat 5 Wolves." }
+    ],
+    "rewards": { "xp": 150, "gold": 75 }
+  }
+]
