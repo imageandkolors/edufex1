@@ -128,3 +128,33 @@ button, .button {
 button:hover, .button:hover {
     background-color: #777;
 }
+
+/* --- Combat Screen Specifics --- */
+#combat-screen {
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+#combat-stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    font-size: 1.1em;
+}
+
+#combat-log {
+    height: 60px;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#combat-actions button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+}

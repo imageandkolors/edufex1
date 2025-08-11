@@ -57,6 +57,24 @@
              <button id="save-button">Save</button>
              <button id="load-button">Load</button>
         </div>
+
+        <!-- Combat Screen -->
+        <div id="combat-screen" class="ui-panel hidden">
+            <h2 id="combat-title">Combat!</h2>
+            <div id="combat-enemy-display">
+                <!-- Enemy sprite will be drawn on canvas, but we can have a placeholder -->
+            </div>
+            <div id="combat-stats-container">
+                <div id="combat-player-stats">Player HP: 100</div>
+                <div id="combat-enemy-stats">Enemy HP: 50</div>
+            </div>
+            <div id="combat-log">
+                <p>A wild Goblin appears!</p>
+            </div>
+            <div id="combat-actions">
+                <button id="attack-button">Attack</button>
+            </div>
+        </div>
     </div>
     <script src="game.js"></script>
 </body>
