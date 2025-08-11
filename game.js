@@ -130,6 +130,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- ANIMATOR CLASS ---
+    // Manages sprite sheet animations for a game object.
+    class Animator {
+        constructor(animations, frameWidth = 32, frameHeight = 32) {
+            this.animations = animations; // Animation map, e.g., { 'walk-down': { row: 0, frames: 4, speed: 100 } }
+            this.frameWidth = frameWidth;
+            this.frameHeight = frameHeight;
+
+            this.currentAnimation = null;
+            this.currentFrame = 0;
+            this.frameTimer = 0;
+        }
+
+        // Sets the active animation, resetting frames if the animation changes.
+        setAnimation(key) {
+            if (this.currentAnimation !== key && this.animations[key]) {
+                this.currentAnimation = key;
+                this.currentFrame = 0;
+                this.frameTimer = 0;
+            }
+        }
+
+        // Updates the animation frame based on delta time and animation speed.
+        update(deltaTime) {
+            if (!this.currentAnimation) return;
+
+            const anim = this.animations[this.currentAnimation];
+            this.frameTimer += deltaTime;
+
+            if (this.frameTimer > anim.speed) {
+                this.frameTimer = 0;
+                this.currentFrame = (this.currentFrame + 1) % anim.frames;
+            }
+        }
+
+        // Gets the coordinates of the current frame from the spritesheet.
+        getFrame() {
+            const anim = this.animations[this.currentAnimation];
+            const sx = this.currentFrame * this.frameWidth;
+            const sy = anim.row * this.frameHeight;
+            return { sx, sy, sWidth: this.frameWidth, sHeight: this.frameHeight };
+        }
+    }
+
     // --- ENEMY CLASS ---
     class Enemy {
         constructor(x, y, enemyData) {
@@ -195,6 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
             this.level = 1; this.gold = 25;
             this.inventory = [{ id: 'health_potion', quantity: 3 }];
             this.quests = [{ id: 'q1_tutorial', status: 'active' }];
+
+            this.direction = 'down';
+            const animations = {
+                'idle-down':  { row: 0, frames: 1, speed: 100 },
+                'walk-down':  { row: 0, frames: 4, speed: 150 },
+                'idle-left':  { row: 1, frames: 1, speed: 100 },
+                'walk-left':  { row: 1, frames: 4, speed: 150 },
+                'idle-right': { row: 2, frames: 1, speed: 100 },
+                'walk-right': { row: 2, frames: 4, speed: 150 },
+                'idle-up':    { row: 3, frames: 1, speed: 100 },
+                'walk-up':    { row: 3, frames: 4, speed: 150 },
+            };
+            this.animator = new Animator(animations);
+            this.animator.setAnimation('idle-down');
         }
         update(deltaTime, world) {
             const moveSpeed = this.speed * (deltaTime / 1000);
@@ -203,16 +261,48 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Input.keys['KeyS'] || Input.keys['ArrowDown']) dy += 1;
             if (Input.keys['KeyA'] || Input.keys['ArrowLeft']) dx -= 1;
             if (Input.keys['KeyD'] || Input.keys['ArrowRight']) dx += 1;
-            if (dx !== 0 || dy !== 0) {
+
+            const isMoving = dx !== 0 || dy !== 0;
+
+            // Update direction based on which key was pressed last for diagonals
+            if (dy < 0) this.direction = 'up';
+            else if (dy > 0) this.direction = 'down';
+            else if (dx < 0) this.direction = 'left';
+            else if (dx > 0) this.direction = 'right';
+
+            const animKey = `${isMoving ? 'walk' : 'idle'}-${this.direction}`;
+            this.animator.setAnimation(animKey);
+
+            if (isMoving) {
                  const length = Math.sqrt(dx * dx + dy * dy);
                  const moveX = (dx / length) * moveSpeed;
                  const moveY = (dy / length) * moveSpeed;
                 if (!world.isSolid(this.x + moveX, this.y) && !world.isSolid(this.x + moveX + this.size, this.y + this.size) && !world.isSolid(this.x + moveX, this.y + this.size) && !world.isSolid(this.x + moveX + this.size, this.y)) this.x += moveX;
                 if (!world.isSolid(this.x, this.y + moveY) && !world.isSolid(this.x + this.size, this.y + moveY + this.size) && !world.isSolid(this.x, this.y + moveY + this.size) && !world.isSolid(this.x + this.size, this.y + moveY)) this.y += moveY;
             }
+
+            this.animator.update(deltaTime);
         }
         draw(ctx, images) {
-            ctx.drawImage(images.player, this.x, this.y, this.size, this.size);
+            const frame = this.animator.getFrame();
+            const image = images.player_spritesheet;
+            if (image && this.animator.currentAnimation) {
+                ctx.drawImage(
+                    image,
+                    frame.sx,
+                    frame.sy,
+                    frame.sWidth,
+                    frame.sHeight,
+                    this.x,
+                    this.y,
+                    this.size,
+                    this.size
+                );
+            } else {
+                // Fallback if animator isn't ready or image is missing
+                ctx.fillStyle = '#f1c40f';
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
         }
     }
 
@@ -264,8 +354,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 items: 'assets/data/items.json', quests: 'assets/data/quests.json',
             };
             const imagePaths = {
-                player: 'assets/images/player.png', wall: 'assets/images/wall.png',
-                floor: 'assets/images/floor.png', goblin: 'assets/images/goblin.png',
+                player_spritesheet: 'assets/images/player_spritesheet.png',
+                wall: 'assets/images/wall.png',
+                floor: 'assets/images/floor.png',
+                goblin: 'assets/images/goblin.png',
             };
 
             try {

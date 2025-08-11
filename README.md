@@ -40,5 +40,19 @@ The game is designed to be data-driven. You can easily modify the game's content
     -   **Managers (`Inventory`, `Quest`, `Save`, `Combat`)**: Placeholder objects that manage specific game systems.
 -   **`assets/`**: Contains all game assets.
     -   `data/`: The customizable JSON files.
-    -   `images/`: Placeholder for sprite images.
+    -   `images/`: Placeholder for sprite images. See the "Image Assets" section below for details on the expected formats.
     -   `sfx/`: Placeholder for sound effects.
+
+### Image Assets (`assets/images/`)
+The game is configured to use 32x32 pixel sprites. You can replace the placeholder PNG files in this directory with your own art.
+
+-   **`player_spritesheet.png`**: This is the spritesheet for the player character. The animation system expects a specific layout:
+    -   It should contain 4 rows, one for each direction.
+    -   **Row 0 (top row):** Walking Down
+    -   **Row 1:** Walking Left
+    -   **Row 2:** Walking Right
+    -   **Row 3 (bottom row):** Walking Up
+    -   Each row should have multiple frames for the walking animation. The system is currently configured for a 4-frame animation cycle (e.g., Idle, Walk1, Walk2, Walk3).
+    -   Therefore, the ideal spritesheet image should be **128px wide** (4 frames * 32px) and **128px high** (4 directions * 32px).
+
+-   **`wall.png`, `floor.png`, `goblin.png`**: These are static 32x32 sprites for world tiles and enemies.
