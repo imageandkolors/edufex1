@@ -73,7 +73,23 @@
             </div>
             <div id="combat-actions">
                 <button id="attack-button">Attack</button>
+                <button id="skill-button">Skill</button>
+                <button id="item-button">Item</button>
+                <button id="run-button">Run</button>
             </div>
+        </div>
+
+        <!-- Skill & Item Selection Panels -->
+        <div id="skill-selection" class="ui-panel hidden">
+            <h3>Use Skill</h3>
+            <div id="skill-list"></div>
+            <button class="close-button" data-target="skill-selection">Cancel</button>
+        </div>
+
+        <div id="item-selection" class="ui-panel hidden">
+            <h3>Use Item</h3>
+            <div id="item-list"></div>
+            <button class="close-button" data-target="item-selection">Cancel</button>
         </div>
     </div>
     <script src="game.js"></script>

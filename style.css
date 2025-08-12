@@ -154,7 +154,25 @@ button:hover, .button:hover {
     text-align: left;
 }
 
+#combat-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 #combat-actions button {
     padding: 10px 20px;
     font-size: 1.1em;
+}
+
+#skill-list, #item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#skill-list button, #item-list button {
+    width: 100%;
+    text-align: left;
 }
